@@ -189,7 +189,10 @@ function showResult(){
   document.getElementById('r-score').textContent=score;
   document.getElementById('r-rank').textContent=r.rank;
   document.getElementById('r-comment').textContent=r.comment;
-  fetch(GAS_URL,{method:'POST',mode:'no-cors',body:JSON.stringify({name:playerName,score:score,rank:r.rank}),headers:{'Content-Type':'application/json'}}).catch(function(){});
+  var url=GAS_URL+'?name='+encodeURIComponent(playerName)+'&score='+encodeURIComponent(String(score))+'&rank='+encodeURIComponent(r.rank);
+  var xhr=new XMLHttpRequest();
+  xhr.open('GET',url,true);
+  xhr.send();
   show('s-result');
 }
 function shareX(){
